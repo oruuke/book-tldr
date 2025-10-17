@@ -86,5 +86,59 @@ pub fn get_files() -> &'static [File<'static>] {
             listing: "3-5",
             status: "desired",
         },
+        File {
+            chapter: "4. understanding ownership; 4.1. what is ownership?",
+            description: "a variable and the scope in which it is valid",
+            listing: "4-1",
+            status: "desired",
+        },
+        File {
+            chapter: "4. understanding ownership; 4.1. what is ownership?",
+            description: "assigning the integer value of vaiable x to y",
+            listing: "4-2",
+            status: "desired",
+        },
+        File {
+            chapter: "4. understanding ownership; 4.1. what is ownership?",
+            description: "functions with ownership and the scope annotated",
+            listing: "4-3",
+            status: "desired",
+        },
+        File {
+            chapter: "4. understanding ownership; 4.1. what is ownership?",
+            description: "transferring ownership of return values",
+            listing: "4-4",
+            status: "desired",
+        },
+        File {
+            chapter: "4. understanding ownership; 4.1. what is ownership?",
+            description: "returning ownership of parameters",
+            listing: "4-5",
+            status: "desired",
+        },
+        File {
+            chapter: "4. understanding ownership; 4.2. references and borrowing",
+            description: "attempting to modify a borrowed value",
+            listing: "4-6",
+            status: "error",
+        },
+        File {
+            chapter: "4. understanding ownership; 4.3. the slice type",
+            description: "the first_word function that returns a byte index value into the string parameter",
+            listing: "4-7",
+            status: "desired",
+        },
+        File {
+            chapter: "4. understanding ownership; 4.3. the slice type",
+            description: "storing the result from calling the first_word function and then changing the string contents",
+            listing: "4-8",
+            status: "desired",
+        },
+        File {
+            chapter: "4. understanding ownership; 4.3. the slice type",
+            description: "improving the first_word function by using a string slice for the type of the s parameter",
+            listing: "4-9",
+            status: "desired",
+        },
     ]
 }
