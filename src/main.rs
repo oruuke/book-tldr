@@ -15,6 +15,8 @@ struct Args {
     description: String,
     #[clap(short, long, default_value = "")]
     listing: String,
+    #[clap(short, long, default_value = "desired")]
+    status: String,
 }
 
 // start program and error if needed
@@ -39,21 +41,23 @@ fn run(args: Args) -> Result<(), Box<dyn Error>> {
             a.chapter.contains(&args.chapter)
                 && a.description.contains(&args.description)
                 && a.listing.contains(&args.listing)
+                && a.status.contains(&args.status)
         })
         .map(|a| a)
         .collect();
 
     // print file details for each result if multiple
     if results.len() > 1 {
-        println!("matched listings:\n");
+        println!("all matched listings:\n");
         for result in results {
-            println!("{:?}\n", result);
+            print_info(result);
         }
     // print all listing code if just one result
     } else if results.len() == 1 {
         let contents = fs::read_to_string(results[0].listing.to_string() + ".md");
         println!("full listing:\n");
-        println!("{:?}\n", results[0]);
+        print_info(results[0]);
+
         if let Ok(line) = contents {
             println!("{line}");
         }
@@ -62,4 +66,10 @@ fn run(args: Args) -> Result<(), Box<dyn Error>> {
     }
 
     Ok(())
+}
+
+fn print_info(file: &File) {
+    println!("chapter: {}", file.chapter);
+    println!("description: {}", file.description);
+    println!("listing: {}, status: {}\n", file.listing, file.status);
 }
