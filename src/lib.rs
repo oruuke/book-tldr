@@ -556,6 +556,12 @@ pub fn get_files() -> &'static [File<'static>] {
         },
         File {
             chapter: "8. common collections; 8.3. storing keys with associated values in hash maps",
+            description: "replacing a value stored with a particular key",
+            listing: "8-23",
+            status: "desired",
+        },
+        File {
+            chapter: "8. common collections; 8.3. storing keys with associated values in hash maps",
             description: "using the entry method to only insert if the key does not already have a value",
             listing: "8-24",
             status: "desired",
