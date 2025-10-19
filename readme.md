@@ -7,3 +7,6 @@ dis repo contains the source of some of the "the rust programming language" book
 exists purely for quick access to the important bits
 
 all listings were obtained from [book](https://github.com/rust-lang/book) and are owned by their respective authors
+
+## usage
+`book-tldr -h`
