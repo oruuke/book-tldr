@@ -54,7 +54,8 @@ fn run(args: Args) -> Result<(), Box<dyn Error>> {
         }
     // print all listing code if just one result
     } else if results.len() == 1 {
-        let contents = fs::read_to_string(results[0].listing.to_string() + ".md");
+        let contents =
+            fs::read_to_string("listings/".to_owned() + &results[0].listing.to_string() + ".md");
         println!("full listing:\n");
         print_info(results[0]);
 
