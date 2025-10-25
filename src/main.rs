@@ -50,7 +50,7 @@ fn run(args: Args) -> Result<(), Box<dyn Error>> {
         .map(|a| a)
         .collect();
 
-    // print file details for each result if multiple
+    // print listing details for each result if multiple
     if results.len() > 1 {
         println!("all matched listings:\n");
         for result in results {
@@ -61,6 +61,7 @@ fn run(args: Args) -> Result<(), Box<dyn Error>> {
         println!("full listing:\n");
         print_info(results[0]);
 
+        // read and print with embedded listing file
         let listing_file = results[0].listing.to_owned() + ".md";
         if let Some(s) = read_text(&listing_file) {
             println!("{s}")
@@ -74,10 +75,12 @@ fn run(args: Args) -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
+// read embedded file
 fn read_text(name: &str) -> Option<&'static str> {
     ASSETS.get_file(name)?.contents_utf8()
 }
 
+// TODO: replace fuzzy match wit split match
 fn check_match(source: &str, query: &str) -> bool {
     if query == "" || source.contains(query) {
         return true;
@@ -92,6 +95,7 @@ fn check_match(source: &str, query: &str) -> bool {
     }
 }
 
+// print listing info
 fn print_info(file: &Listing) {
     println!("chapter: {}", file.chapter);
     println!("description: {}", file.description);
