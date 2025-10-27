@@ -778,7 +778,7 @@ pub fn get_files() -> &'static [Listing<'static>] {
         },
         Listing {
             chapter: "[10.] generic types, traits, and lifetimes; [10.3.] validating references with lifetimes",
-            description: "using  the longest function with references to string values  that have different concrete lifetimes",
+            description: "using  the longest function with references to string values that have different concrete lifetimes",
             listing: "10-22",
             status: "desired",
         },

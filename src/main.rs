@@ -1,8 +1,6 @@
 use book_tldr::Listing;
 use book_tldr::get_files;
 use clap::Parser;
-use fuzzy_matcher::FuzzyMatcher;
-use fuzzy_matcher::skim::SkimMatcherV2;
 use include_dir::{Dir, include_dir};
 use std::error::Error;
 use std::process;
@@ -42,10 +40,10 @@ fn run(args: Args) -> Result<(), Box<dyn Error>> {
     let results: Vec<&'static Listing> = files
         .iter()
         .filter(|a| {
-            check_match(a.chapter, &args.chapter)
-                && check_match(a.description, &args.description)
-                && check_match(a.listing, &args.listing)
-                && check_match(a.status, &args.status)
+            split_match(a.chapter, &args.chapter) > 0
+                && split_match(a.description, &args.description) > 0
+                && split_match(a.listing, &args.listing) > 0
+                && split_match(a.status, &args.status) > 0
         })
         .map(|a| a)
         .collect();
@@ -81,18 +79,35 @@ fn read_text(name: &str) -> Option<&'static str> {
 }
 
 // TODO: replace fuzzy match wit split match
-fn check_match(source: &str, query: &str) -> bool {
-    if query == "" || source.contains(query) {
-        return true;
+fn split_match<'a>(source: &'a str, query: &'a str) -> u32 {
+    if query.len() == 0 {
+        return 1;
     }
-    let matcher = SkimMatcherV2::default();
-    let test = matcher.fuzzy_indices(source, query);
-    if test != None {
-        let (score, _indices) = test.unwrap();
-        return score >= 50;
-    } else {
-        return false;
+    let bytes = query.as_bytes();
+    let mut words: Vec<&str> = Vec::new();
+    let mut remaining: &str = &query;
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            let diff = query.len() - remaining.len();
+            words.push(&remaining[..i - diff].trim());
+            remaining = &query[i..];
+        }
+        if i == query.len() - 1 {
+            words.push(remaining);
+        }
     }
+
+    let mut score = 0;
+    for word in &words {
+        if source.contains(word) {
+            score = score + 1;
+        } else {
+            return 0;
+        }
+    }
+
+    score
 }
 
 // print listing info
