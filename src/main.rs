@@ -60,7 +60,8 @@ fn run(args: Args) -> Result<(), Box<dyn Error>> {
         print_info(results[0]);
 
         // read and print with embedded listing file
-        let listing_file = results[0].listing.to_owned() + ".md";
+        let listing = results[0].listing;
+        let listing_file = listing[1..listing.len() - 1].to_owned() + ".md";
         if let Some(s) = read_text(&listing_file) {
             println!("{s}")
         } else {
