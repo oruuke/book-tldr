@@ -365,7 +365,7 @@ pub fn get_files() -> &'static [Listing<'static>] {
         Listing {
             chapter: "[7.] managing growing projects with packages, crates, and modules; [7.4.] bringing paths into scope with the use keyword",
             description: "bringing the add_to_waitlist function into scope with use, which is unidiomatic",
-            listing: "[7-12]",
+            listing: "[7-13]",
             status: "questionable",
         },
         Listing {
