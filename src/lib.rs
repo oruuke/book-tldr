@@ -538,12 +538,6 @@ pub fn get_files() -> &'static [Listing<'static>] {
         },
         Listing {
             chapter: "[8.] common collections; [8.3.] storing keys with associated values in hash maps",
-            description: "creating a new hash map and inserting some keys and values",
-            listing: "[8-20]",
-            status: "desired",
-        },
-        Listing {
-            chapter: "[8.] common collections; [8.3.] storing keys with associated values in hash maps",
             description: "accessing the score for the blue team stored in the hash map",
             listing: "[8-21]",
             status: "desired",
